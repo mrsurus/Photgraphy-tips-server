@@ -12,10 +12,17 @@ app.use(express.json())
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.nzh9xhl.mongodb.net/?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
-console.log(uri);
+
 async function run(){
     try{
         const reviewCollection = client.db('reviewAssign').collection('review')
+
+        app.get('/services', async(req, res)=> {
+            const query = {}
+            const cursor = reviewCollection.find(query)
+            const result = await cursor.toArray()
+            res.send(result)
+        })
     }
     finally{
 
