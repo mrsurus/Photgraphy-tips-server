@@ -40,7 +40,6 @@ async function run(){
         })
         app.post('/allservices', async(req,res)=> {
             const info = req.body;
-            console.log(info)
             const result = await reviewCollection.insertOne(info)
             res.send(result)
         })
