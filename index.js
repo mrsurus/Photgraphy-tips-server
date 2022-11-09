@@ -38,11 +38,13 @@ async function run(){
             res.send(result)
            
         })
+
         app.post('/allservices', async(req,res)=> {
             const info = req.body;
             const result = await reviewCollection.insertOne(info)
             res.send(result)
         })
+        
         app.post('/review', async(req, res)=> {
             const data = req.body;
             const result = await givenReviewCollection.insertOne(data)
@@ -65,6 +67,7 @@ async function run(){
             const result = await givenReviewCollection.findOne(query)
             res.send(result)
         })
+
         app.put('/review/:id', async(req, res)=> {
             const id = req.params.id;
             const filter = {_id: ObjectId(id)}
