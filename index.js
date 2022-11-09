@@ -30,11 +30,7 @@ async function run(){
             const result = await cursor.toArray()
             res.send(result)
         })
-        app.post('/review', async(req, res)=> {
-            const data = req.body;
-            const result = await givenReviewCollection.insertOne(data)
-            res.send(result)
-        })
+        
         app.get('/allservices/:id', async(req, res)=> {
             const id = req.params.id
             const query = {_id: ObjectId(id)}
@@ -42,6 +38,29 @@ async function run(){
             res.send(result)
            
         })
+        app.post('/review', async(req, res)=> {
+            const data = req.body;
+            const result = await givenReviewCollection.insertOne(data)
+            res.send(result)
+        })
+        app.get('/review', async(req,res)=> {
+            const query = req.query
+            const result = await givenReviewCollection.find(query).toArray()
+            res.send(result)
+        })
+        app.delete('/review/:id', async(req, res)=> {
+            const id = req.params.id
+            const query = {_id: ObjectId(id)}
+            const result = await givenReviewCollection.deleteOne(query)
+            res.send(result)
+        })
+        app.get('/review/:id', async(req, res)=> {
+            const id = req.params.id
+            const query = {_id: ObjectId(id)}
+            const result = await givenReviewCollection.findOne(query)
+            res.send(result)
+        })
+        app.put()
     }
     finally{
 
