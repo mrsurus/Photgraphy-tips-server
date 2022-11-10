@@ -85,7 +85,6 @@ async function run() {
             if (req.query.email) {
                 query = { email: req.query.email }
             }
-            console.log(query);
             const result = await givenReviewCollection.find(query).sort({'date':-1}).toArray()
             res.send(result)
         })
