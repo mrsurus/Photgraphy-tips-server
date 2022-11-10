@@ -86,12 +86,12 @@ async function run() {
                 query = { email: req.query.email }
             }
             console.log(query);
-            const result = await givenReviewCollection.find(query).toArray()
+            const result = await givenReviewCollection.find(query).sort({'date':-1}).toArray()
             res.send(result)
         })
         app.get('/reviews', async(req,res)=>{
             const query= req.query
-            const result = await givenReviewCollection.find(query).toArray()
+            const result = await givenReviewCollection.find(query).sort({'date':-1}).toArray()
             res.send(result)
         })
 
